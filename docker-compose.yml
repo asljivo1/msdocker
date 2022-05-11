@@ -1,0 +1,32 @@
+version: '3'
+services:
+  app:
+    image: 'docker-spring-boot-atlant:latest'
+    build: ./springbootapp
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demodb
+      - SPRING_DATASOURCE_USERNAME=demouser
+      - SPRING_DATASOURCE_PASSWORD=DemoPa$$
+      - APP_NODE_URL=http://node:8081/
+    ports:
+      - "8080:8080"
+
+  db:
+    container_name: db
+    image: postgres:10-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: demouser
+      POSTGRES_PASSWORD: DemoPa$$
+      POSTGRES_DB: demodb
+
+  node:
+    image: 'node-app-atlant:latest'
+    build: ./nodeapp
+    container_name: node
+    ports:
+      - "8081:8081"
+
