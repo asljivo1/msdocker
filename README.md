@@ -23,5 +23,5 @@ cd msdocker
 ```
 docker-compose up
 ```
-6. Enjoy!
+4. Enjoy!
 
